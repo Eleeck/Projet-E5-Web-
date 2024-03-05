@@ -1,0 +1,37 @@
+<!-- Structure HTML -->
+<!-- ... Votre tableau de places de parking ... -->
+
+<script>
+    function selectPlace(placeElement) {
+        var placeId = placeElement.id;
+
+        // Requête AJAX vers le script PHP pour mettre à jour l'état de la place
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                // Traitement de la réponse
+                if (this.responseText === "success") {
+                    // Mettre à jour l'affichage côté client
+                    // ... Actualiser l'état visuel de la place sélectionnée ...
+                }
+            }
+        };
+        xhttp.open("GET", "update_place_status.php?id=" + placeId, true);
+        xhttp.send();
+    }
+</script>
+
+<?php
+// Connectez-vous à la base de données et mettez à jour l'état de la place
+if (isset($_GET['id'])) {
+    $placeId = $_GET['id'];
+
+    // Effectuez la mise à jour de l'état de la place avec l'ID donné
+    // ... (votre code pour mettre à jour la base de données) ...
+
+    // Après la mise à jour, renvoyez une réponse appropriée
+    echo "success";
+} else {
+    echo "error";
+}
+?>
